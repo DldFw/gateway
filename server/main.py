@@ -2,19 +2,18 @@
 # coding: utf-8
 
 import pyjsonrpc
-
-class RequestHandler(pyjsonrpc.HttpRequestHandler):
-    @pyjsonrpc.rpcmethod
-    def add(self, a, b):
-        print "rpc method add"
-        return a + b
+import gatewayhandler
 
 http_server = pyjsonrpc.ThreadingHttpServer(
     server_address = ("localhost", 8090),
-    RequestHandlerClass = RequestHandler
+    RequestHandlerClass = gatewayhandler.RequestHandler
     )
+
 print "Starting HTTP server ..."
 print "URL:http://localhost:8090"
 
-http_server.serve_forever()
+def main():
+    http_server.serve_forever()
 
+if __name__ == '__main__':
+    main()
